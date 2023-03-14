@@ -23,15 +23,10 @@ describe("MongoDriver", () => {
             },
         }
 
-        const connectPromise = driver.connect()
+        await driver.connect()
+        const connectMethodArgs = connect.args[0]
 
-        // Take the promise parameter that we receive in the callback, call it, so the underlying promise gets resolved.
-        const firstMethodCall = connect.args[0]
-        const callback = firstMethodCall[2]
-        callback(undefined, {})
-        await connectPromise
-
-        return firstMethodCall[0]
+        return connectMethodArgs[0]
     }
 
     describe("connection string", () => {
